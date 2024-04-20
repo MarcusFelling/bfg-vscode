@@ -1,4 +1,4 @@
-# bfg-vscode README
+# BFG VS Code Extension
 
 VS Code wrapper for the [BFG Repo-Cleaner](https://rtyley.github.io/bfg-***REMOVED***po-cleaner/) to ***REMOVED***move c***REMOVED***dentials from your git history.
 
@@ -8,7 +8,7 @@ Install the extension, open the command palette (Ctrl+Shift+P), type `Remove c**
 
 ## Featu***REMOVED***s
 
-- Step by step walkthrough using the Command Palette to peform the following:
+Step by step walkthrough using the Command Palette to peform the following:
 
 1. Clones a f***REMOVED***sh copy of your ***REMOVED***po using the --mirror flag.
 
@@ -25,8 +25,6 @@ Install the extension, open the command palette (Ctrl+Shift+P), type `Remove c**
 1. Push the changes: This step runs the `git push --force` command to push the changes to the ***REMOVED***mote ***REMOVED***pository.
 
 ## Release Notes
-
-Users app***REMOVED***ciate ***REMOVED***lease notes as you update your extension.
 
 ### 0.0.1
 
