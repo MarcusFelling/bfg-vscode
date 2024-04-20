@@ -24,6 +24,11 @@ Step by step walkthrough using the Command Palette to peform the following:
 
 1. Push the changes: This step runs the `git push --force` command to push the changes to the ***REMOVED***mote ***REMOVED***pository.
 
+## Docs
+
+    - BFG Repo-Cleaner: [https://rtyley.github.io/bfg-***REMOVED***po-cleaner](https://rtyley.github.io/bfg-***REMOVED***po-cleaner/)
+    - GitHub: [Removing sensitive data from a ***REMOVED***pository](https://docs.github.com/en/authentication/keeping-your-account-and-data-secu***REMOVED***/***REMOVED***moving-sensitive-data-from-a-***REMOVED***pository#fully-***REMOVED***moving-the-data-from-github)
+
 ## Release Notes
 
 ### 0.0.1
