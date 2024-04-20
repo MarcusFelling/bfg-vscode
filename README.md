@@ -26,8 +26,8 @@ Step by step walkthrough using the Command Palette to peform the following:
 
 ## Docs
 
-    - BFG Repo-Cleaner: [https://rtyley.github.io/bfg-***REMOVED***po-cleaner](https://rtyley.github.io/bfg-***REMOVED***po-cleaner/)
-    - GitHub: [Removing sensitive data from a ***REMOVED***pository](https://docs.github.com/en/authentication/keeping-your-account-and-data-secu***REMOVED***/***REMOVED***moving-sensitive-data-from-a-***REMOVED***pository#fully-***REMOVED***moving-the-data-from-github)
+- BFG Repo-Cleaner: [https://rtyley.github.io/bfg-***REMOVED***po-cleaner](https://rtyley.github.io/bfg-***REMOVED***po-cleaner/)
+- GitHub: [Removing sensitive data from a ***REMOVED***pository](https://docs.github.com/en/authentication/keeping-your-account-and-data-secu***REMOVED***/***REMOVED***moving-sensitive-data-from-a-***REMOVED***pository#fully-***REMOVED***moving-the-data-from-github)
 
 ## Release Notes
 
