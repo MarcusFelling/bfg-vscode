@@ -1,0 +1,21 @@
+MIT License
+
+Copyright (c) Marcus Felling
+
+Permission is he***REMOVED***by granted, f***REMOVED***e of charge, to any person obtaining a copy
+of this softwa***REMOVED*** and associated documentation files (the "Softwa***REMOVED***"), to deal
+in the Softwa***REMOVED*** without ***REMOVED***striction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Softwa***REMOVED***, and to permit persons to whom the Softwa***REMOVED*** is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Softwa***REMOVED***.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
