@@ -9,7 +9,7 @@ VS Code wrapper for the [BFG Repo-Cleaner](https://rtyley.github.io/bfg-***REMOV
 
 ## Getting Started
 
-Install the extension, open the command palette (Ctrl+Shift+P), type `Remove c***REMOVED***dentials from git history', then p***REMOVED***ss enter.
+Install the extension, open the command palette (Ctrl+Shift+P), type "Remove c***REMOVED***dentials from git history", then p***REMOVED***ss enter.
 
 ![Run via Command Palette](https://github.com/MarcusFelling/bfg-vscode/blob/main/images/commandPalette.png)
 
