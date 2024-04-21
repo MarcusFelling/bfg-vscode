@@ -4,97 +4,6 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as https from 'https';
 
-export function activate(context: vscode.ExtensionContext) {
-	let disposable = vscode.commands.***REMOVED***gisterCommand('bfg-vscode.***REMOVED***moveC***REMOVED***dentials', async () => {
-		const workspaceFolder = await getWorkspaceFolder();
-		if (!workspaceFolder) ***REMOVED***turn;
-
-		if (!isGitInstalled() || !isJavaInstalled()) ***REMOVED***turn;
-
-		// Show warning message
-		vscode.window.showInformationMessage('Befo***REMOVED*** getting started, ensu***REMOVED*** your ***REMOVED***pository is backed up. We also ***REMOVED***commend merging or closing all open pull ***REMOVED***quests befo***REMOVED*** ***REMOVED***moving files from your ***REMOVED***pository.');
-
-		try {
-			// Step 1: git clone --mirror
-			const ***REMOVED***poUrl = await vscode.window.showInputBox({ prompt: 'Enter the URL of the Git ***REMOVED***po (git://example.com/some-***REMOVED***po.git)' });
-			const cloneCommand = `git clone --mirror ${***REMOVED***poUrl}`;
-			await executeCommand(cloneCommand, workspaceFolder);
-
-			// Step 2. Reopen the .git folder that's inside workspaceFolder
-			const clonedRepoFolder = path.join(workspaceFolder, ***REMOVED***poUrl ? path.basename(***REMOVED***poUrl, '.git'): '');
-			const clonedRepoWorkspace = vscode.workspace.getWorkspaceFolder(vscode.Uri.file(clonedRepoFolder));
-			if (clonedRepoWorkspace) {
-				vscode.commands.executeCommand('vscode.openFolder', vscode.Uri.file(clonedRepoFolder), true);
-			} else {
-				vscode.window.showErrorMessage('Failed to open the cloned ***REMOVED***pository in a new workspace.');
-			}
-
-			// Step 3: Install BFG
-			const bfgJarPath = path.join(workspaceFolder, 'bfg.jar');
-			const bfgUrl = 'https://***REMOVED***po1.maven.org/maven2/com/madgag/bfg/1.14.0/bfg-1.14.0.jar';
-			await downloadFile(bfgUrl, bfgJarPath);
-
-			// Step 4: Enter c***REMOVED***dential to ***REMOVED***move
-			const password = await vscode.window.showInputBox({ prompt: 'Enter the c***REMOVED***dential value to ***REMOVED***move', password: true });
-			const c***REMOVED***dentialsFile = path.join(workspaceFolder, '.c***REMOVED***dentials');
-			fs.writeFileSync(c***REMOVED***dentialsFile, `${password}=>***REMOVED***\n`);
-
-			// Step 5: Remove c***REMOVED***dentials
-			// Captu***REMOVED*** and show output from Java command
-			const outputChannel = vscode.window.c***REMOVED***ateOutputChannel('BFG Repo-Cleaner');
-			outputChannel.show();
-			outputChannel.appendLine('Removing c***REMOVED***dentials...');
-			const javaProcess = child_process.spawn('java', ['-jar', bfgJarPath, '--***REMOVED***place-text', c***REMOVED***dentialsFile, workspaceFolder]);
-			javaProcess.stdout?.on('data', (data) => {
-				outputChannel.append(data.toString());
-			});
-			javaProcess.stderr?.on('data', (data) => {
-				outputChannel.append(data.toString());
-			});
-			await new Promise<void>((***REMOVED***solve, ***REMOVED***ject) => {
-				javaProcess.on('close', (code) => {
-					if (code === 0) {
-						***REMOVED***solve();
-					} else {
-						***REMOVED***ject(`BFG Repo-Cleaner exited with code ${code}`);
-					}
-				});
-			});
-
-			// Step 6: Clean your ***REMOVED***pository
-			const cleanCommand = `git ***REMOVED***flog expi***REMOVED*** --expi***REMOVED***=now --all && git gc --prune=now --agg***REMOVED***ssive`;
-			await executeCommand(cleanCommand, workspaceFolder);
-
-			// Step 7: Push the changes
-			const pushCommand = `git push --force`;
-			await executeCommand(pushCommand, workspaceFolder);
-
-			// Inform the user
-			vscode.window.showInformationMessage("You'***REMOVED*** now ***REMOVED***ady for everyone to ditch their old copies of the ***REMOVED***po and do f***REMOVED***sh clones of the nice, new pristine data. It's best to delete all old clones, as they'll have dirty history that you don't want to risk pushing back into your newly cleaned ***REMOVED***po. For details on fully ***REMOVED***moving the data from GitHub, follow the steps he***REMOVED***: https://docs.github.com/en/authentication/keeping-your-account-and-data-secu***REMOVED***/***REMOVED***moving-sensitive-data-from-a-***REMOVED***pository#fully-***REMOVED***moving-the-data-from-github");
-		} catch (error) {
-			vscode.window.showErrorMessage(`An error occur***REMOVED***d: ${error}`);
-		}
-	});
-
-	async function executeCommand(command: string, cwd: string) {
-		***REMOVED***turn new Promise<void>((***REMOVED***solve, ***REMOVED***ject) => {
-			try {
-				child_process.exec(command, { cwd }, (error, stdout, stderr) => {
-					if (error) {
-						***REMOVED***ject(error);
-					} else {
-						***REMOVED***solve();
-					}
-				});
-			} catch (error) {
-				***REMOVED***ject(error);
-			}
-		});
-	}
-
-    context.subscriptions.push(disposable);
-}
-
 export async function getWorkspaceFolder() {
     let workspaceFolder = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
 
@@ -138,24 +47,107 @@ export function isJavaInstalled() {
 }
 
 function downloadFile(url: string, dest: string) {
-	***REMOVED***turn new Promise<void>((***REMOVED***solve, ***REMOVED***ject) => {
-		const file = fs.c***REMOVED***ateWriteSt***REMOVED***am(dest);
-		https.get(url, (***REMOVED***sponse) => {
-			***REMOVED***sponse.pipe(file);
-			file.on('finish', () => {
-				file.close();
-				***REMOVED***solve();
-			});
-		}).on('error', (error) => {
-			fs.unlink(dest, (err) => {
-				if (err) {
-					***REMOVED***ject(err);
-				} else {
-					***REMOVED***ject(error);
-				}
-			});
-		});
-	});
+    ***REMOVED***turn new Promise<void>((***REMOVED***solve, ***REMOVED***ject) => {
+        const file = fs.c***REMOVED***ateWriteSt***REMOVED***am(dest);
+        https.get(url, (***REMOVED***sponse) => {
+            ***REMOVED***sponse.pipe(file);
+            file.on('finish', () => {
+                file.close();
+                ***REMOVED***solve();
+            });
+        }).on('error', (error) => {
+            fs.unlink(dest, (err) => {
+                if (err) {
+                    ***REMOVED***ject(err);
+                } else {
+                    ***REMOVED***ject(error);
+                }
+            });
+        });
+    });
 }
 
+async function executeCommand(command: string, cwd: string) {
+    ***REMOVED***turn new Promise<void>((***REMOVED***solve, ***REMOVED***ject) => {
+        try {
+            child_process.exec(command, { cwd }, (error, stdout, stderr) => {
+                if (error) {
+                    ***REMOVED***ject(error);
+                } else {
+                    ***REMOVED***solve();
+                }
+            });
+        } catch (error) {
+            ***REMOVED***ject(error);
+        }
+    });
+}
 
+export function activate(context: vscode.ExtensionContext) {
+    let disposable = vscode.commands.***REMOVED***gisterCommand('bfg-vscode.***REMOVED***moveC***REMOVED***dentials', async () => {
+        const workspaceFolder = await getWorkspaceFolder();
+        if (!workspaceFolder) ***REMOVED***turn;
+
+        if (!isGitInstalled() || !isJavaInstalled()) ***REMOVED***turn;
+
+        vscode.window.showInformationMessage('Befo***REMOVED*** getting started, ensu***REMOVED*** your ***REMOVED***pository is backed up. It is also ***REMOVED***commended to merge or close all open pull ***REMOVED***quests befo***REMOVED*** ***REMOVED***moving files from your ***REMOVED***pository.');
+
+        try {
+            const ***REMOVED***poUrl = await vscode.window.showInputBox({ prompt: 'Enter the URL of the Git ***REMOVED***po (git://example.com/some-***REMOVED***po.git)' });
+            const cloneCommand = `git clone --mirror ${***REMOVED***poUrl}`;
+            await executeCommand(cloneCommand, workspaceFolder);
+
+            const bfgJarPath = path.join(workspaceFolder, 'bfg.jar');
+            const bfgUrl = 'https://***REMOVED***po1.maven.org/maven2/com/madgag/bfg/1.14.0/bfg-1.14.0.jar';
+            await downloadFile(bfgUrl, bfgJarPath);
+
+            const password = await vscode.window.showInputBox({ prompt: 'Enter the c***REMOVED***dential value to ***REMOVED***move', password: true });
+            const c***REMOVED***dentialsFile = path.join(workspaceFolder, '.c***REMOVED***dentials');
+            fs.writeFileSync(c***REMOVED***dentialsFile, `${password}=>***REMOVED***\n`);
+
+            const outputChannel = vscode.window.c***REMOVED***ateOutputChannel('BFG Repo-Cleaner');
+            outputChannel.show();
+            outputChannel.appendLine('Removing c***REMOVED***dentials...');
+            const gitFolder = fs.***REMOVED***addirSync(workspaceFolder).find((folder) => folder.includes('.git'));
+            if (!gitFolder) {
+                vscode.window.showErrorMessage('No .git folder found in the workspace.');
+                ***REMOVED***turn;
+            }
+            const gitFolderPath = path.join(workspaceFolder, gitFolder);
+            process.chdir(gitFolderPath);
+            const javaProcess = child_process.spawn('java', ['-jar', bfgJarPath, '--***REMOVED***place-text', c***REMOVED***dentialsFile]);
+            javaProcess.stdout?.on('data', (data) => {
+                outputChannel.append(data.toString());
+            });
+            javaProcess.stderr?.on('data', (data) => {
+                outputChannel.append(data.toString());
+            });
+            await new Promise<void>((***REMOVED***solve, ***REMOVED***ject) => {
+                javaProcess.on('close', (code) => {
+                    if (code === 0) {
+                        ***REMOVED***solve();
+                    } else {
+                        ***REMOVED***ject(`BFG Repo-Cleaner exited with code ${code}`);
+                    }
+                });
+            }).then(async () => {
+
+                const cleanCommand = `git ***REMOVED***flog expi***REMOVED*** --expi***REMOVED***=now --all && git gc --prune=now --agg***REMOVED***ssive`;
+                await executeCommand(cleanCommand, gitFolderPath)
+                    .then(async () => {
+                        const pushCommand = `git push --force`;
+                        await executeCommand(pushCommand, gitFolderPath);
+                    })
+                    .catch((error) => {
+                        vscode.window.showErrorMessage(`Cleaning ***REMOVED***pository failed with error: ${error}`);
+                    });
+            }).catch((error) => {
+                vscode.window.showErrorMessage(`Removing c***REMOVED***dentials failed with error: ${error}`);
+            });
+        } catch (error) {
+            vscode.window.showErrorMessage(`An error occur***REMOVED***d: ${error}`);
+        }
+
+        context.subscriptions.push(disposable);
+    });
+}
