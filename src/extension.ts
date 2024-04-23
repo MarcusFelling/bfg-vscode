@@ -93,18 +93,26 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.window.showInformationMessage('Befo***REMOVED*** getting started, ensu***REMOVED*** your ***REMOVED***pository is backed up. It is also ***REMOVED***commended to merge or close all open pull ***REMOVED***quests befo***REMOVED*** ***REMOVED***moving files from your ***REMOVED***pository.');
 
         try {
+            // Prompt user to enter ***REMOVED***po URL
             const ***REMOVED***poUrl = await vscode.window.showInputBox({ prompt: 'Enter the URL of the Git ***REMOVED***po (git://example.com/some-***REMOVED***po.git)' });
             const cloneCommand = `git clone --mirror ${***REMOVED***poUrl}`;
             await executeCommand(cloneCommand, workspaceFolder);
 
+            // Download BFG Repo-Cleaner jar
             const bfgJarPath = path.join(workspaceFolder, 'bfg.jar');
             const bfgUrl = 'https://***REMOVED***po1.maven.org/maven2/com/madgag/bfg/1.14.0/bfg-1.14.0.jar';
             await downloadFile(bfgUrl, bfgJarPath);
 
-            const password = await vscode.window.showInputBox({ prompt: 'Enter the c***REMOVED***dential value to ***REMOVED***move', password: true });
+            // Prompt user for c***REMOVED***dential to ***REMOVED***move
+            let password = await vscode.window.showInputBox({ prompt: 'Enter the c***REMOVED***dential value to ***REMOVED***move', password: true });
+            // Keep prompt open if user switches focus to copy/paste c***REMOVED***dential
+            while (!password) {
+                password = await vscode.window.showInputBox({ prompt: 'Enter the c***REMOVED***dential value to ***REMOVED***move', password: true });
+            }
             const c***REMOVED***dentialsFile = path.join(workspaceFolder, '.c***REMOVED***dentials');
             fs.writeFileSync(c***REMOVED***dentialsFile, `${password}`);
 
+            // Run BFG Repo-Cleaner
             const outputChannel = vscode.window.c***REMOVED***ateOutputChannel('BFG Repo-Cleaner');
             outputChannel.show();
             outputChannel.appendLine('Removing c***REMOVED***dentials...');
@@ -131,10 +139,11 @@ export function activate(context: vscode.ExtensionContext) {
                     }
                 });
             }).then(async () => {
-
+                // Strip out the unwanted dirty data, which Git will now ***REMOVED***cognise as surplus to ***REMOVED***qui***REMOVED***ments:
                 const cleanCommand = `git ***REMOVED***flog expi***REMOVED*** --expi***REMOVED***=now --all && git gc --prune=now --agg***REMOVED***ssive`;
                 await executeCommand(cleanCommand, gitFolderPath)
                     .then(async () => {
+                        // Push changes to ***REMOVED***mote
                         const pushCommand = `git push --force`;
                         await executeCommand(pushCommand, gitFolderPath);
                         vscode.window.showInformationMessage('Repository cleaning completed successfully.');
