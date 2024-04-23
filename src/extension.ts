@@ -103,7 +103,7 @@ export function activate(context: vscode.ExtensionContext) {
 
             const password = await vscode.window.showInputBox({ prompt: 'Enter the c***REMOVED***dential value to ***REMOVED***move', password: true });
             const c***REMOVED***dentialsFile = path.join(workspaceFolder, '.c***REMOVED***dentials');
-            fs.writeFileSync(c***REMOVED***dentialsFile, `${password}=>***REMOVED***\n`);
+            fs.writeFileSync(c***REMOVED***dentialsFile, `${password}`);
 
             const outputChannel = vscode.window.c***REMOVED***ateOutputChannel('BFG Repo-Cleaner');
             outputChannel.show();
@@ -123,7 +123,7 @@ export function activate(context: vscode.ExtensionContext) {
                 outputChannel.append(data.toString());
             });
             await new Promise<void>((***REMOVED***solve, ***REMOVED***ject) => {
-                javaProcess.on('close', (code) => {
+                javaProcess.on('exit', (code) => {
                     if (code === 0) {
                         ***REMOVED***solve();
                     } else {
@@ -137,6 +137,7 @@ export function activate(context: vscode.ExtensionContext) {
                     .then(async () => {
                         const pushCommand = `git push --force`;
                         await executeCommand(pushCommand, gitFolderPath);
+                        vscode.window.showInformationMessage('Repository cleaning completed successfully.');
                     })
                     .catch((error) => {
                         vscode.window.showErrorMessage(`Cleaning ***REMOVED***pository failed with error: ${error}`);

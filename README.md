@@ -36,7 +36,7 @@ Step by step walkthrough using the Command Palette to peform the following:
 
 ## 🚚 Release Notes
 
-### 0.0.4
+### 0.1.0
 
 Initial ***REMOVED***lease
 
