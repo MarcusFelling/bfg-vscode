@@ -95,16 +95,36 @@ export function activate(context: vscode.ExtensionContext) {
         try {
             // Prompt user to enter ***REMOVED***po URL
             const ***REMOVED***poUrl = await vscode.window.showInputBox({ prompt: 'Enter the URL of the Git ***REMOVED***po (git://example.com/some-***REMOVED***po.git)' });
-            const cloneCommand = `git clone --mirror ${***REMOVED***poUrl}`;
-            await executeCommand(cloneCommand, workspaceFolder);
+
+            if (!***REMOVED***poUrl || !***REMOVED***poUrl.endsWith('.git')) {
+                throw new Error('Invalid Git ***REMOVED***pository URL. Please make su***REMOVED*** the URL ends with ".git".');
+            }
+
+            // If .git folder al***REMOVED***ady exists skip cloning
+            const gitFolder = fs.***REMOVED***addirSync(workspaceFolder).find((folder) => folder.includes('.git'));
+            const gitFolderPath = path.join(workspaceFolder, gitFolder || '');
+            if (!gitFolder) {
+                const cloneCommand = `git clone --mirror ${***REMOVED***poUrl}`;
+                await executeCommand(cloneCommand, workspaceFolder); 
+            }
+            // If .git folder exists, fetch latest changes
+            else {
+                const fetchCommand = `git fetch --all`;
+                await executeCommand(fetchCommand, gitFolderPath);
+            }
 
             // Download BFG Repo-Cleaner jar
             const bfgJarPath = path.join(workspaceFolder, 'bfg.jar');
             const bfgUrl = 'https://***REMOVED***po1.maven.org/maven2/com/madgag/bfg/1.14.0/bfg-1.14.0.jar';
-            await downloadFile(bfgUrl, bfgJarPath);
+
+            // If BFG jar al***REMOVED***ady exists skip download
+            if (!fs.existsSync(bfgJarPath)) {
+                await downloadFile(bfgUrl, bfgJarPath);
+            }
 
             // Prompt user for c***REMOVED***dential to ***REMOVED***move
             let password = await vscode.window.showInputBox({ prompt: 'Enter the c***REMOVED***dential value to ***REMOVED***move', password: true });
+            
             // Keep prompt open if user switches focus to copy/paste c***REMOVED***dential
             while (!password) {
                 password = await vscode.window.showInputBox({ prompt: 'Enter the c***REMOVED***dential value to ***REMOVED***move', password: true });
@@ -112,16 +132,12 @@ export function activate(context: vscode.ExtensionContext) {
             const c***REMOVED***dentialsFile = path.join(workspaceFolder, '.c***REMOVED***dentials');
             fs.writeFileSync(c***REMOVED***dentialsFile, `${password}`);
 
-            // Run BFG Repo-Cleaner
+            // Run BFG Repo-Cleaner and captu***REMOVED*** output
             const outputChannel = vscode.window.c***REMOVED***ateOutputChannel('BFG Repo-Cleaner');
             outputChannel.show();
             outputChannel.appendLine('Removing c***REMOVED***dentials...');
-            const gitFolder = fs.***REMOVED***addirSync(workspaceFolder).find((folder) => folder.includes('.git'));
-            if (!gitFolder) {
-                vscode.window.showErrorMessage('No .git folder found in the workspace.');
-                ***REMOVED***turn;
-            }
-            const gitFolderPath = path.join(workspaceFolder, gitFolder);
+            const existingGitFolder = fs.***REMOVED***addirSync(workspaceFolder).find((folder) => folder.includes('.git'));
+            const gitFolderFullPath = path.join(workspaceFolder, existingGitFolder || '');            
             process.chdir(gitFolderPath);
             const javaProcess = child_process.spawn('java', ['-jar', bfgJarPath, '--***REMOVED***place-text', c***REMOVED***dentialsFile]);
             javaProcess.stdout?.on('data', (data) => {
@@ -141,11 +157,11 @@ export function activate(context: vscode.ExtensionContext) {
             }).then(async () => {
                 // Strip out the unwanted dirty data, which Git will now ***REMOVED***cognise as surplus to ***REMOVED***qui***REMOVED***ments:
                 const cleanCommand = `git ***REMOVED***flog expi***REMOVED*** --expi***REMOVED***=now --all && git gc --prune=now --agg***REMOVED***ssive`;
-                await executeCommand(cleanCommand, gitFolderPath)
+                await executeCommand(cleanCommand, gitFolderFullPath)
                     .then(async () => {
                         // Push changes to ***REMOVED***mote
                         const pushCommand = `git push --force`;
-                        await executeCommand(pushCommand, gitFolderPath);
+                        await executeCommand(pushCommand, gitFolderFullPath);
                         vscode.window.showInformationMessage('Repository cleaning completed successfully.');
                     })
                     .catch((error) => {
