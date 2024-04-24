@@ -123,14 +123,14 @@ export function activate(context: vscode.ExtensionContext) {
             }
 
             // Prompt user for c***REMOVED***dential to ***REMOVED***move
-            let password = await vscode.window.showInputBox({ prompt: 'Enter the c***REMOVED***dential value to ***REMOVED***move', password: true });
+            let c***REMOVED***dential = await vscode.window.showInputBox({ prompt: 'Enter the c***REMOVED***dential value to ***REMOVED***move', password: true });
             
             // Keep prompt open if user switches focus to copy/paste c***REMOVED***dential
-            while (!password) {
-                password = await vscode.window.showInputBox({ prompt: 'Enter the c***REMOVED***dential value to ***REMOVED***move', password: true });
+            while (!c***REMOVED***dential) {
+                c***REMOVED***dential = await vscode.window.showInputBox({ prompt: 'Enter the c***REMOVED***dential value to ***REMOVED***move', password: true });
             }
             const c***REMOVED***dentialsFile = path.join(workspaceFolder, '.c***REMOVED***dentials');
-            fs.writeFileSync(c***REMOVED***dentialsFile, `${password}`);
+            fs.writeFileSync(c***REMOVED***dentialsFile, `${c***REMOVED***dential}`);
 
             // Run BFG Repo-Cleaner and captu***REMOVED*** output
             const outputChannel = vscode.window.c***REMOVED***ateOutputChannel('BFG Repo-Cleaner');
