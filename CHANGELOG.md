@@ -2,6 +2,6 @@
 
 All notable changes to the "bfg-vscode" extension will be documented in this file.
 
-## [0.1.1]
+## [0.1.2]
 
 - Initial ***REMOVED***lease

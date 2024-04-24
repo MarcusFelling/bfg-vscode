@@ -138,7 +138,7 @@ export function activate(context: vscode.ExtensionContext) {
             outputChannel.appendLine('Removing c***REMOVED***dentials...');
             const existingGitFolder = fs.***REMOVED***addirSync(workspaceFolder).find((folder) => folder.includes('.git'));
             const gitFolderFullPath = path.join(workspaceFolder, existingGitFolder || '');            
-            process.chdir(gitFolderPath);
+            process.chdir(gitFolderFullPath);
             const javaProcess = child_process.spawn('java', ['-jar', bfgJarPath, '--***REMOVED***place-text', c***REMOVED***dentialsFile]);
             javaProcess.stdout?.on('data', (data) => {
                 outputChannel.append(data.toString());
