@@ -2,7 +2,7 @@
   "name": "bfg-vscode",
   "displayName": "bfg-vscode",
   "description": "VS Code wrapper for the BFG Repo-Cleaner to ***REMOVED***move c***REMOVED***dentials from your git history.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "MFelling",
   "icon": "icon.png",
   "engines": {
