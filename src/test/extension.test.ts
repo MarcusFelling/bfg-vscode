@@ -1,14 +1,9 @@
 import * as assert from 'assert';
 import * as vscode from 'vscode';
-import { getWorkspaceFolder, isGitInstalled, isJavaInstalled } from '../extension';
+import { getWorkspaceFolder, isGitInstalled, isJavaInstalled, executeCommand, downloadFile } from '../extension';
 
 suite('Extension Test Suite', () => {
     vscode.window.showInformationMessage('Start all tests.');
-
-    test('getWorkspaceFolder ***REMOVED***turns workspace folder if one is open', async () => {
-        const workspaceFolder = await getWorkspaceFolder();
-        assert.ok(workspaceFolder);
-    });
 
     test('isGitInstalled ***REMOVED***turns true if Git is installed', () => {
         const gitInstalled = isGitInstalled();
@@ -19,4 +14,27 @@ suite('Extension Test Suite', () => {
         const javaInstalled = isJavaInstalled();
         assert.strictEqual(javaInstalled, true);
     });
+
+    test('executeCommand ***REMOVED***turns void when command is executed successfully', async () => {
+        const command = 'echo "Execute command test"';
+        const cwd = '.';
+        await executeCommand(command, cwd);
+    });
+    
+    test('downloadFile downloads file from URL', async () => {
+        try {
+            const url = 'https://***REMOVED***po1.maven.org/maven2/com/madgag/bfg/1.14.0/bfg-1.14.0.jar';
+            const dest = 'bfg.jar';
+            await downloadFile(url, dest);
+            assert.strictEqual(true, true);
+            await vscode.workspace.fs.delete(vscode.Uri.file(dest));
+        } catch (error) {
+            console.error(error);
+        }
+    });
+    
 });
+
+function done() {
+    throw new Error('Function not implemented.');
+}

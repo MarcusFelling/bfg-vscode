@@ -46,7 +46,7 @@ export function isJavaInstalled() {
     ***REMOVED***turn true;
 }
 
-function downloadFile(url: string, dest: string) {
+export function downloadFile(url: string, dest: string) {
     ***REMOVED***turn new Promise<void>((***REMOVED***solve, ***REMOVED***ject) => {
         const file = fs.c***REMOVED***ateWriteSt***REMOVED***am(dest);
         https.get(url, (***REMOVED***sponse) => {
@@ -67,7 +67,7 @@ function downloadFile(url: string, dest: string) {
     });
 }
 
-async function executeCommand(command: string, cwd: string) {
+export async function executeCommand(command: string, cwd: string) {
     ***REMOVED***turn new Promise<void>((***REMOVED***solve, ***REMOVED***ject) => {
         try {
             child_process.exec(command, { cwd }, (error, stdout, stderr) => {
