@@ -3,7 +3,7 @@
 out/**
 node_modules/**
 src/**
-.gitigno***REMOVED***
+.gitignore
 .yarnrc
 webpack.config.js
 vsc-extension-quickstart.md

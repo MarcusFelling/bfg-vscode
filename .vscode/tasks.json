@@ -8,8 +8,8 @@
 			"script": "watch",
 			"problemMatcher": "$ts-webpack-watch",
 			"isBackground": true,
-			"p***REMOVED***sentation": {
-				"***REMOVED***veal": "never",
+			"presentation": {
+				"reveal": "never",
 				"group": "watchers"
 			},
 			"group": {
@@ -22,8 +22,8 @@
 			"script": "watch-tests",
 			"problemMatcher": "$tsc-watch",
 			"isBackground": true,
-			"p***REMOVED***sentation": {
-				"***REMOVED***veal": "never",
+			"presentation": {
+				"reveal": "never",
 				"group": "watchers"
 			},
 			"group": "build"

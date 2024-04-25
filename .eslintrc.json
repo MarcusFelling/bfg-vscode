@@ -22,7 +22,7 @@
         "no-throw-literal": "warn",
         "semi": "off"
     },
-    "igno***REMOVED***Patterns": [
+    "ignorePatterns": [
         "out",
         "dist",
         "**/*.d.ts"
