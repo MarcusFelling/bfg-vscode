@@ -6,7 +6,7 @@
   "publisher": "MFelling",
   "icon": "icon.png",
   "engines": {
-    "vscode": "^1.88.0"
+    "vscode": "^1.0.0"
   },
   "categories": [
     "Other"
