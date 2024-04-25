@@ -1,4 +1,4 @@
-# BFG VS Code Extension
+# Git C***REMOVED***dential Purge VS Code Extension
 
 VS Code wrapper for the [BFG Repo-Cleaner](https://rtyley.github.io/bfg-***REMOVED***po-cleaner/) to ***REMOVED***move c***REMOVED***dentials from your git history.
 
@@ -36,7 +36,7 @@ Step by step walkthrough using the Command Palette to peform the following:
 
 ## 🚚 Release Notes
 
-### 0.1.2
+### 0.1.3
 
 Initial ***REMOVED***lease
 
