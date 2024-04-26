@@ -101,7 +101,7 @@ export function activate(context: vscode.ExtensionContext) {
             }
 
             // If .git folder already exists skip cloning
-            const gitFolder = fs.readdirSync(workspaceFolder).find((folder) => folder.includes('.git'));
+            const gitFolder = fs.readdirSync(workspaceFolder).find((folder) => folder.match(/\.git$/));
             const gitFolderPath = path.join(workspaceFolder, gitFolder || '');
             if (!gitFolder) {
                 const cloneCommand = `git clone --mirror ${repoUrl}`;
