@@ -40,7 +40,7 @@ Step by step walkthrough using the Command Palette to peform the following:
 
 ## 🚚 Release Notes
 
-### 0.1.3
+### 0.1.4
 
 Initial release
 
