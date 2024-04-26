@@ -94,7 +94,7 @@ export function activate(context: vscode.ExtensionContext) {
 
         try {
             // Prompt user to enter repo URL
-            const repoUrl = await vscode.window.showInputBox({ prompt: 'Enter the URL of the Git repo (git://example.com/some-repo.git)' });
+            const repoUrl = await vscode.window.showInputBox({ prompt: 'Enter the URL of the Git repo (https://example.com/some-repo.git)' });
 
             if (!repoUrl || !repoUrl.endsWith('.git')) {
                 throw new Error('Invalid Git repository URL. Please make sure the URL ends with ".git".');

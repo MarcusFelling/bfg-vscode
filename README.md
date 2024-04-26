@@ -9,9 +9,13 @@ VS Code wrapper for the [BFG Repo-Cleaner](https://rtyley.github.io/bfg-repo-cle
 
 ## ✅ Getting Started
 
-Install the extension, open the command palette (Ctrl+Shift+P), type "Remove credentials from git history", then press enter.
-
+1. Install the extension
+1. Open the command palette (Ctrl+Shift+P), type "Remove credentials from git history", press enter.
 ![Run via Command Palette](./images/commandPalette.png)
+1. Enter repo URL.
+![Enter repo URL](./images/enterRepoURL.png)
+1. Enter credential to remove.
+![Enter cred to remove](./images/enterCred.png)
 
 ## 💡 Features
 
