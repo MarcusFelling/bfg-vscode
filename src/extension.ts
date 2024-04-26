@@ -101,7 +101,7 @@ export function activate(context: vscode.ExtensionContext) {
             }
 
             // If .git folder already exists skip cloning
-            const gitFolder = fs.readdirSync(workspaceFolder).find((folder) => folder.match(/\.git$/));
+            const gitFolder = fs.readdirSync(workspaceFolder).find((folder) => folder.endsWith('.git'));
             const gitFolderPath = path.join(workspaceFolder, gitFolder || '');
             if (!gitFolder) {
                 const cloneCommand = `git clone --mirror ${repoUrl}`;
@@ -136,7 +136,7 @@ export function activate(context: vscode.ExtensionContext) {
             const outputChannel = vscode.window.createOutputChannel('BFG Repo-Cleaner');
             outputChannel.show();
             outputChannel.appendLine('Removing credentials...');
-            const existingGitFolder = fs.readdirSync(workspaceFolder).find((folder) => folder.includes('.git'));
+            const existingGitFolder = fs.readdirSync(workspaceFolder).find((folder) => folder.endsWith('.git'));
             const gitFolderFullPath = path.join(workspaceFolder, existingGitFolder || '');            
             process.chdir(gitFolderFullPath);
             const javaProcess = child_process.spawn('java', ['-jar', bfgJarPath, '--replace-text', credentialsFile]);
