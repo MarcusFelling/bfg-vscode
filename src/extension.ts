@@ -162,7 +162,7 @@ export function activate(context: vscode.ExtensionContext) {
                         // Push changes to remote
                         const pushCommand = `git push --force`;
                         await executeCommand(pushCommand, gitFolderFullPath);
-                        vscode.window.showInformationMessage('Repository cleaning completed successfully.');
+                        vscode.window.showInformationMessage("Repository cleaning completed successfully. You're ready for everyone to ditch their old copies of the repo and do fresh clones of the nice, new pristine data. It's best to delete all old clones, as they'll have dirty history that you don't want to risk pushing back into your newly cleaned repo.");
                     })
                     .catch((error) => {
                         vscode.window.showErrorMessage(`Cleaning repository failed with error: ${error}`);
