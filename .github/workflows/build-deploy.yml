@@ -1,10 +1,10 @@
-name: Build and Deploy
+name: Build, Test, Deploy
 
 on:
   workflow_dispatch:
 
 jobs:
-  build:
+  buildTestDeploy:
     runs-on: ubuntu-latest
 
     steps:
