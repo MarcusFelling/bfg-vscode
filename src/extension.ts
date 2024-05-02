@@ -86,9 +86,13 @@ export async function executeCommand(command: string, cwd: string) {
 export function activate(context: vscode.ExtensionContext) {
     let disposable = vscode.commands.registerCommand('bfg-vscode.removeCredentials', async () => {
         const workspaceFolder = await getWorkspaceFolder();
-        if (!workspaceFolder) return;
+        if (!workspaceFolder) {
+            return;
+        }
 
-        if (!isGitInstalled() || !isJavaInstalled()) return;
+        if (!isGitInstalled() || !isJavaInstalled()) {
+            return;
+        }
 
         vscode.window.showInformationMessage('Before getting started, ensure your repository is backed up. It is also recommended to merge or close all open pull requests before removing files from your repository.');
 
