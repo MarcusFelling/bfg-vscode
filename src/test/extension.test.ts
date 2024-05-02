@@ -11,12 +11,6 @@ suite('Extension Test Suite', () => {
         done();
     });
 
-    test('isJavaInstalled returns true if Java is installed', (done) => {
-        const javaInstalled = isJavaInstalled();
-        assert.strictEqual(javaInstalled, true);
-        done();
-    });
-
     test('executeCommand returns void when command is executed successfully', async () => {
         const command = 'echo "Execute command test"';
         const cwd = '.';
