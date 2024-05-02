@@ -1,6 +1,6 @@
 import * as assert from 'assert';
 import * as vscode from 'vscode';
-import { getWorkspaceFolder, isGitInstalled, isJavaInstalled, executeCommand, downloadFile } from '../extension';
+import { isGitInstalled, isJavaInstalled, executeCommand, downloadFile } from '../extension';
 
 suite('Extension Test Suite', () => {
     vscode.window.showInformationMessage('Start all tests.');
