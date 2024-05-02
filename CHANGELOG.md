@@ -5,3 +5,7 @@ All notable changes to the "bfg-vscode" extension will be documented in this fil
 ## [0.1.6]
 
 - Initial release
+
+## [0.1.7]
+
+- Set up CI with GitHub Actions

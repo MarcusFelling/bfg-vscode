@@ -44,4 +44,8 @@ Step by step walkthrough using the Command Palette to peform the following:
 
 Initial release
 
+### 0.1.7
+
+Set up CI with GitHub Actions
+
 ---
