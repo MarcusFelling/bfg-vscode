@@ -24,6 +24,8 @@ jobs:
 
       - name: Publish to Visual Studio Marketplace
         uses: HaaLeo/publish-vscode-extension@v1
+        env:
+          SUPER_SECRET: ${{ secrets.VS_MARKETPLACE_TOKEN }}        
         with:
           pat: ${{ secrets.VS_MARKETPLACE_TOKEN }}
           vsix: ./*.vsix
