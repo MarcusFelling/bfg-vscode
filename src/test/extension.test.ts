@@ -5,14 +5,16 @@ import { isGitInstalled, isJavaInstalled, executeCommand, downloadFile } from '.
 suite('Extension Test Suite', () => {
     vscode.window.showInformationMessage('Start all tests.');
 
-    test('isGitInstalled returns true if Git is installed', () => {
+    test('isGitInstalled returns true if Git is installed', (done) => {
         const gitInstalled = isGitInstalled();
         assert.strictEqual(gitInstalled, true);
+        done();
     });
 
-    test('isJavaInstalled returns true if Java is installed', () => {
+    test('isJavaInstalled returns true if Java is installed', (done) => {
         const javaInstalled = isJavaInstalled();
         assert.strictEqual(javaInstalled, true);
+        done();
     });
 
     test('executeCommand returns void when command is executed successfully', async () => {
@@ -34,7 +36,3 @@ suite('Extension Test Suite', () => {
     });
     
 });
-
-function done() {
-    throw new Error('Function not implemented.');
-}
