@@ -13,3 +13,7 @@ All notable changes to the "bfg-vscode" extension will be documented in this fil
 ## [0.1.8]
 
 - Show progress bar between git commands
+
+## [0.1.9]
+
+- Show feedback message to file GitHub Issue

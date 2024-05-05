@@ -52,4 +52,8 @@ Set up CI with GitHub Actions
 
 Show progress bar between git commands
 
+### 0.1.9
+
+Show feedback message to file GitHub Issue
+
 ---

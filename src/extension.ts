@@ -188,7 +188,15 @@ export function activate(context: vscode.ExtensionContext) {
         } catch (error) {
             vscode.window.showErrorMessage(`An error occurred: ${error}`);
         }
-
-        context.subscriptions.push(disposable);
+        // Show feedback message
+        vscode.window.showInformationMessage(
+            'Feedback is welcome! Please file any issues or suggestions on GitHub.',
+            'Open GitHub'
+        ).then(selection => {
+            if (selection === 'Open GitHub') {
+                vscode.env.openExternal(vscode.Uri.parse('https://github.com/MarcusFelling/bfg-vscode/issues'));
+            }
+        });
     });
+    context.subscriptions.push(disposable);
 }
