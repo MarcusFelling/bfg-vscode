@@ -48,4 +48,8 @@ Initial release
 
 Set up CI with GitHub Actions
 
+### 0.1.8
+
+Show progress bar between git commands
+
 ---

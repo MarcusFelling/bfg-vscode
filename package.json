@@ -2,7 +2,7 @@
   "name": "bfg-vscode",
   "displayName": "Git Credential Purge",
   "description": "VS Code wrapper for the BFG Repo-Cleaner to remove credentials from your git history.",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "publisher": "MFelling",
   "icon": "icon.png",
   "engines": {
