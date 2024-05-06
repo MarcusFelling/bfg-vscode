@@ -17,3 +17,7 @@ All notable changes to the "bfg-vscode" extension will be documented in this fil
 ## [0.1.9]
 
 - Show feedback message to file GitHub Issue
+
+## [0.2.0]
+
+- Support repos that don't use post-fixed .git URLs

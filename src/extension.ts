@@ -100,12 +100,8 @@ export function activate(context: vscode.ExtensionContext) {
             // Prompt user to enter repo URL
             const repoUrl = await vscode.window.showInputBox({ prompt: 'Enter the URL of the Git repo (https://example.com/some-repo.git)' });
 
-            if (!repoUrl || !repoUrl.endsWith('.git')) {
-                throw new Error('Invalid Git repository URL. Please make sure the URL ends with ".git".');
-            }
-
             // If .git folder already exists skip cloning
-            const gitFolder = fs.readdirSync(workspaceFolder).find((folder) => folder.endsWith('.git'));
+            const gitFolder = fs.readdirSync(workspaceFolder).find((folder) => folder !== '.git' && folder.endsWith('.git'));
             const gitFolderPath = path.join(workspaceFolder, gitFolder || '');
             if (!gitFolder) {
                 const cloneCommand = `git clone --mirror ${repoUrl}`;

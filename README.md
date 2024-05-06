@@ -56,4 +56,8 @@ Show progress bar between git commands
 
 Show feedback message to file GitHub Issue
 
+### 0.2.0
+
+Support repos that don't use post-fixed .git URLs
+
 ---
